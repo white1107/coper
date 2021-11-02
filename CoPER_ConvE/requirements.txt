@@ -1,6 +1,6 @@
 fastdtw
 numpy
-pyyaml == 5.1.4
+pyyaml == 5.4.1
 requests
 six
 tensorflow-gpu == 1.14
