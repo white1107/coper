@@ -1,7 +1,7 @@
 fastdtw
 numpy
-pyyaml
+pyyaml == 5.1.4
 requests
 six
-tensorflow # or tensorflow-gpu
+tensorflow-gpu == 1.14
 tqdm
