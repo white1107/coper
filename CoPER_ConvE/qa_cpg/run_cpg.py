@@ -6,6 +6,8 @@ import os
 import pickle
 import tensorflow as tf
 import yaml
+import wandb
+wandb.init(project="Coper_ConvE_WN18RR")
 
 from qa_cpg import data
 from qa_cpg.models import ConvE
@@ -26,9 +28,10 @@ def _evaluate(data_iterator, data_iterator_handle, name, summary_writer, step):
         summary = tf.Summary()
         for hits_level, hits_value in hits.items():
             summary.value.add(tag=name+'/hits@'+str(hits_level), simple_value=hits_value)
-            metrics['hits@'+str(hits_level)] = hits_value
-        summary.value.add(tag=name+'/mrr', simple_value=mrr)
+            metrics['hits@'+str(hits_level)] = hits_value;wandb.log({'hits@'+str(hits_level):hits_value})
+        summary.value.add(tag=name+'/mrr',simple_value=mrr)
         summary.value.add(tag=name+'/mr', simple_value=mr)
+        wandb.log({name+'/mrr': mrr,name+'/mr':mr})
         summary_writer.add_summary(summary, step)
         summary_writer.flush()
 
@@ -36,13 +39,14 @@ def _evaluate(data_iterator, data_iterator_handle, name, summary_writer, step):
 
 
 # Parameters.
-use_cpg = False
+model_type = 'cpg'
+use_cpg = True
 use_parameter_lookup = True
 save_best_embeddings = True
 model_load_path = None
 
 # Load data.
-data_loader = data.KinshipLoader()
+data_loader = data.WN18RRLoader()
 #data_loader = data.NELL995Loader(is_test=True, needs_test_set_cleaning=True)
 
 # Load configuration parameters.
@@ -220,8 +224,7 @@ if __name__ == '__main__':
 
         # Log the loss, if necessary.
         if step % cfg.eval.log_steps == 0:
-            logger.info('Step %6d | Loss: %10.4f', step, loss)
-
+            logger.info('Step %6d | Loss: %10.4f', step, loss);wandb.log('loss':loss)
         # Evaluate, if necessary.
         if step % cfg.eval.eval_steps == 0:
             # Perform evaluation.
