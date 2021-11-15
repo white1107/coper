@@ -5,3 +5,4 @@ requests
 six
 tensorflow-gpu == 1.14
 tqdm
+wandb == 0.10.8
