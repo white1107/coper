@@ -1,0 +1,24 @@
+{
+    "os": "Linux-5.4.0-88-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.6.13",
+    "heartbeatAt": "2021-11-14T10:35:04.504515",
+    "startedAt": "2021-11-14T10:35:03.108886",
+    "docker": null,
+    "gpu": "GeForce GTX 1080",
+    "gpu_count": 8,
+    "cpu_count": 20,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "codePath": "CoPER_ConvE/qa_cpg/run_cpg.py",
+    "program": "/home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py",
+    "git": {
+        "remote": "https://github.com/white1107/coper.git",
+        "commit": "71b243b12b56e6a84f99b15ac0fe86bc8b23e338"
+    },
+    "email": "sakisasaki0205@gmail.com",
+    "root": "/home/masumoto/coper",
+    "host": "conner",
+    "username": "masumoto",
+    "executable": "/home/masumoto/anaconda3/envs/py36_tf114/bin/python"
+}

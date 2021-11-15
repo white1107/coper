@@ -1,0 +1,13 @@
+2021-11-15 19:58:44,976 INFO    MainThread:2578459 [wandb_init.py:_log_setup():293] Logging user logs to wandb/run-20211115_195844-2o3caxub/logs/debug.log
+2021-11-15 19:58:44,976 INFO    MainThread:2578459 [wandb_init.py:_log_setup():294] Logging internal logs to wandb/run-20211115_195844-2o3caxub/logs/debug-internal.log
+2021-11-15 19:58:44,976 INFO    MainThread:2578459 [wandb_setup.py:_flush():69] setting env: {}
+2021-11-15 19:58:44,976 INFO    MainThread:2578459 [wandb_setup.py:_flush():69] setting user settings: {'email': 'sakisasaki0205@gmail.com'}
+2021-11-15 19:58:44,976 INFO    MainThread:2578459 [wandb_setup.py:_flush():69] multiprocessing start_methods=fork,spawn,forkserver
+2021-11-15 19:58:46,514 INFO    MainThread:2578459 [wandb_run.py:_console_start():1290] atexit reg
+2021-11-15 19:58:46,515 INFO    MainThread:2578459 [wandb_run.py:_redirect():1160] redirect: SettingsConsole.REDIRECT
+2021-11-15 19:58:46,517 INFO    MainThread:2578459 [wandb_run.py:_redirect():1163] Redirecting console.
+2021-11-15 19:58:46,517 INFO    MainThread:2578459 [redirect.py:install():196] install start
+2021-11-15 19:58:46,518 INFO    MainThread:2578459 [redirect.py:install():211] install stop
+2021-11-15 19:58:46,518 INFO    MainThread:2578459 [redirect.py:install():196] install start
+2021-11-15 19:58:46,519 INFO    MainThread:2578459 [redirect.py:install():211] install stop
+2021-11-15 19:58:46,519 INFO    MainThread:2578459 [wandb_run.py:_redirect():1207] Redirects installed.

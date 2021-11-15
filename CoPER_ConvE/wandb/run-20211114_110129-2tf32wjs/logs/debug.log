@@ -1,0 +1,30 @@
+2021-11-14 11:01:29,495 INFO    MainThread:3461388 [wandb_setup.py:_flush():71] setting env: {}
+2021-11-14 11:01:29,495 INFO    MainThread:3461388 [wandb_setup.py:_flush():71] setting login settings: {}
+2021-11-14 11:01:29,496 INFO    MainThread:3461388 [wandb_init.py:_log_setup():357] Logging user logs to /home/masumoto/coper/CoPER_ConvE/wandb/run-20211114_110129-2tf32wjs/logs/debug.log
+2021-11-14 11:01:29,496 INFO    MainThread:3461388 [wandb_init.py:_log_setup():358] Logging internal logs to /home/masumoto/coper/CoPER_ConvE/wandb/run-20211114_110129-2tf32wjs/logs/debug-internal.log
+2021-11-14 11:01:29,496 INFO    MainThread:3461388 [wandb_init.py:init():390] calling init triggers
+2021-11-14 11:01:29,496 INFO    MainThread:3461388 [wandb_init.py:init():397] wandb.init called with sweep_config: {}
+config: {}
+2021-11-14 11:01:29,497 INFO    MainThread:3461388 [wandb_init.py:init():435] starting backend
+2021-11-14 11:01:29,497 INFO    MainThread:3461388 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2021-11-14 11:01:29,510 INFO    MainThread:3461388 [backend.py:ensure_launched():199] starting backend process...
+2021-11-14 11:01:29,515 INFO    MainThread:3461388 [backend.py:ensure_launched():205] started backend process with pid: 3461467
+2021-11-14 11:01:29,517 INFO    MainThread:3461388 [wandb_init.py:init():444] backend started and connected
+2021-11-14 11:01:29,519 INFO    MainThread:3461388 [wandb_init.py:init():503] updated telemetry
+2021-11-14 11:01:29,535 INFO    MainThread:3461388 [wandb_init.py:init():533] communicating current version
+2021-11-14 11:01:34,536 INFO    MainThread:3461388 [wandb_init.py:init():548] communicating run to backend with 30 second timeout
+2021-11-14 11:01:34,552 ERROR   MainThread:3461388 [wandb_init.py:init():897] error
+Traceback (most recent call last):
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/wandb_init.py", line 870, in init
+    run = wi.init()
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/wandb_init.py", line 549, in init
+    ret = backend.interface.communicate_run(run, timeout=30)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/interface/interface.py", line 205, in communicate_run
+    return self._communicate_run(run, timeout=timeout)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/interface/interface_queue.py", line 334, in _communicate_run
+    resp = self._communicate(req, timeout=timeout)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/interface/interface_queue.py", line 232, in _communicate
+    return self._communicate_async(rec, local=local).get(timeout=timeout)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/wandb/sdk/interface/interface_queue.py", line 237, in _communicate_async
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown

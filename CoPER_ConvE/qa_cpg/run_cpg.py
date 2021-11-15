@@ -7,7 +7,6 @@ import pickle
 import tensorflow as tf
 import yaml
 import wandb
-wandb.init(project="Coper_ConvE_WN18RR")
 
 from qa_cpg import data
 from qa_cpg.models import ConvE
@@ -38,15 +37,23 @@ def _evaluate(data_iterator, data_iterator_handle, name, summary_writer, step):
     return metrics
 
 
+		
+
 # Parameters.
-model_type = 'cpg'
-use_cpg = True
-use_parameter_lookup = True
+model_type = 'plain'
+use_cpg = False
+use_parameter_lookup = False
 save_best_embeddings = True
 model_load_path = None
 
+wandb.init(
+  project="Coper_ConvE_KinshipLoader",
+  notes="plain_usecpgF_lookupF",
+  tags=["Kinship","plain"])
+
+
 # Load data.
-data_loader = data.WN18RRLoader()
+data_loader = data.KinshipLoader()
 #data_loader = data.NELL995Loader(is_test=True, needs_test_set_cleaning=True)
 
 # Load configuration parameters.
@@ -224,7 +231,7 @@ if __name__ == '__main__':
 
         # Log the loss, if necessary.
         if step % cfg.eval.log_steps == 0:
-            logger.info('Step %6d | Loss: %10.4f', step, loss);wandb.log('loss':loss)
+            logger.info('Step %6d | Loss: %10.4f', step, loss);wandb.log({'loss':loss})
         # Evaluate, if necessary.
         if step % cfg.eval.eval_steps == 0:
             # Perform evaluation.
@@ -255,8 +262,8 @@ if __name__ == '__main__':
                     saver.save(session, ckpt_path)
 
                 logger.info('Best dev %s so far is at step %d. Best dev metrics: %s',
-                            validation_metric, best_iter, str(best_metrics_dev))
-                logger.info('Test metrics at best dev: %s', str(metrics_test_at_best_dev))
+                            validation_metric, best_iter, str(best_metrics_dev));wandb.log({'best_metrics_dev':best_metrics_dev})
+                logger.info('Test metrics at best dev: %s', str(metrics_test_at_best_dev));wandb.log({'metrics_test_at_best_dev':metrics_test_at_best_dev})
 
 #         if step % cfg.eval.ckpt_steps == 0 and step > 0:
 #             logger.info('Step %d. Saving checkpoint at %s...', step, ckpt_path)
@@ -264,5 +271,5 @@ if __name__ == '__main__':
 
     if cfg.eval.eval_on_dev and cfg.eval.eval_on_test:
         logger.info('Best dev %s so far is at step %d. Best dev metrics: %s',
-                    validation_metric, best_iter, str(best_metrics_dev))
-        logger.info('Test metrics at best dev: %s', str(metrics_test_at_best_dev))
+			validation_metric, best_iter, str(best_metrics_dev));wandb.log({'best_metrics_dev':best_metrics_dev})
+        logger.info('Test metrics at best dev: %s', str(metrics_test_at_best_dev));wandb.log({'metrics_test_at_best_dev':metrics_test_at_best_dev})

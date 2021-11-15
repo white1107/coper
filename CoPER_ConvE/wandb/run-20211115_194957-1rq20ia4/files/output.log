@@ -1,0 +1,1476 @@
+/home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:69: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  cfg_dict = yaml.load(file)
+{'model': {'entity_embedding_size': 200, 'relation_embedding_size': 200, 'concat_rel': False, 'input_dropout': 0.2, 'feature_map_dropout': 0.3, 'output_dropout': 0.2, 'label_smoothing_epsilon': 0.1, 'batch_norm_momentum': 0.1, 'batch_norm_train_stats': False}, 'context': {'context_rel_conv': None, 'context_rel_out': None, 'context_rel_dropout': 0.2, 'context_rel_use_batch_norm': True}, 'training': {'learning_rate': 0.001, 'batch_size': 512, 'device': '/GPU:0', 'max_steps': 50000, 'prop_negatives': 10.0, 'num_labels': 100, 'one_positive_label_per_sample': False, 'cache_data': True}, 'eval': {'validation_metric': 'hits@1', 'log_steps': 50, 'ckpt_steps': 1000, 'eval_steps': 100, 'summary_steps': 100, 'eval_on_train': False, 'eval_on_dev': True, 'eval_on_test': True, 'add_loss_summaries': True, 'add_variable_summaries': False, 'add_tensor_summaries': False}}
+2021-11-15 19:49:58,921 - PID: 2561780 - INFO    - __main__             - Model name: plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2
+2021-11-15 19:49:58,925 - PID: 2561780 - INFO    - qa_cpg.data          - Creating TF record files for the 'kinship' dataset.
+2021-11-15 19:49:58,925 - PID: 2561780 - INFO    - qa_cpg.data          - Loading and preprocessing the 'kinship' dataset.
+2021-11-15 19:49:59,100 - PID: 2561780 - INFO    - qa_cpg.data          - The directory is /home/masumoto/coper/CoPER_ConvE/temp/kinship/data/kinship/kinship
+2021-11-15 19:49:59,101 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `train`. We are not recreating them!
+2021-11-15 19:49:59,101 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `dev`. We are not recreating them!
+2021-11-15 19:49:59,102 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `test`. We are not recreating them!
+2021-11-15 19:49:59,118 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:125: The name tf.variable_scope is deprecated. Please use tf.compat.v1.variable_scope instead.
+
+2021-11-15 19:49:59,118 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:135: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+2021-11-15 19:49:59,120 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:137: The name tf.data.Iterator is deprecated. Please use tf.compat.v1.data.Iterator instead.
+
+2021-11-15 19:49:59,127 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:158: The name tf.placeholder_with_default is deprecated. Please use tf.compat.v1.placeholder_with_default instead.
+
+2021-11-15 19:49:59,129 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:205: The name tf.get_variable is deprecated. Please use tf.compat.v1.get_variable instead.
+
+2021-11-15 19:49:59,578 - PID: 2561780 - WARNING - tensorflow           - 
+The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+  * https://github.com/tensorflow/io (for I/O related ops)
+If you depend on functionality not listed there, please file an issue.
+
+2021-11-15 19:49:59,636 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:387: The name tf.AUTO_REUSE is deprecated. Please use tf.compat.v1.AUTO_REUSE instead.
+
+2021-11-15 19:49:59,636 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:388: batch_normalization (from tensorflow.python.layers.normalization) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.BatchNormalization instead.  In particular, `tf.control_dependencies(tf.GraphKeys.UPDATE_OPS)` should not be used (consult the `tf.keras.layers.batch_normalization` documentation).
+2021-11-15 19:49:59,681 - PID: 2561780 - WARNING - tensorflow           - Entity <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x7f3c15c44cf8>> could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x7f3c15c44cf8>>: AttributeError: module 'gast' has no attribute 'Str'
+2021-11-15 19:49:59,689 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:391: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+2021-11-15 19:49:59,755 - PID: 2561780 - WARNING - tensorflow           - Entity <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x7f3c6da21160>> could not be transformed and will be executed as-is. Please report this to the AutgoGraph team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output. Cause: converting <bound method BatchNormalization.call of <tensorflow.python.layers.normalization.BatchNormalization object at 0x7f3c6da21160>>: AttributeError: module 'gast' has no attribute 'Str'
+2021-11-15 19:49:59,779 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:452: The name tf.losses.sigmoid_cross_entropy is deprecated. Please use tf.compat.v1.losses.sigmoid_cross_entropy instead.
+
+2021-11-15 19:49:59,781 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/ops/nn_impl.py:180: add_dispatch_support.<locals>.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.where in 2.0, which has the same broadcast rule as np.where
+2021-11-15 19:49:59,807 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:456: The name tf.summary.scalar is deprecated. Please use tf.compat.v1.summary.scalar instead.
+
+2021-11-15 19:50:00,623 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/models.py:201: The name tf.summary.merge_all is deprecated. Please use tf.compat.v1.summary.merge_all instead.
+
+2021-11-15 19:50:00,626 - PID: 2561780 - INFO    - __main__             - Creating train dataset...
+2021-11-15 19:50:00,627 - PID: 2561780 - INFO    - qa_cpg.data          - Creating TF record files for the 'kinship' dataset.
+2021-11-15 19:50:00,627 - PID: 2561780 - INFO    - qa_cpg.data          - Loading and preprocessing the 'kinship' dataset.
+2021-11-15 19:50:00,847 - PID: 2561780 - INFO    - qa_cpg.data          - The directory is /home/masumoto/coper/CoPER_ConvE/temp/kinship/data/kinship/kinship
+2021-11-15 19:50:00,858 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `train`. We are not recreating them!
+2021-11-15 19:50:00,858 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `dev`. We are not recreating them!
+2021-11-15 19:50:00,859 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `test`. We are not recreating them!
+2021-11-15 19:50:00,917 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/data.py:234: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Create a `tf.sparse.SparseTensor` and use `tf.sparse.to_dense` instead.
+num_positives_needed:  9
+2021-11-15 19:50:00.961572: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2021-11-15 19:50:01.048785: E tensorflow/stream_executor/cuda/cuda_driver.cc:318] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2021-11-15 19:50:01.048977: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: conner
+2021-11-15 19:50:01.048990: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: conner
+2021-11-15 19:50:01.049197: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 460.91.3
+2021-11-15 19:50:01.049279: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 460.91.3
+2021-11-15 19:50:01.049289: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 460.91.3
+2021-11-15 19:50:01,075 - PID: 2561780 - INFO    - __main__             - Creating train eval dataset...
+2021-11-15 19:50:01,075 - PID: 2561780 - INFO    - qa_cpg.data          - Creating TF record files for the 'kinship' dataset.
+2021-11-15 19:50:01,075 - PID: 2561780 - INFO    - qa_cpg.data          - Loading and preprocessing the 'kinship' dataset.
+2021-11-15 19:50:01,340 - PID: 2561780 - INFO    - qa_cpg.data          - The directory is /home/masumoto/coper/CoPER_ConvE/temp/kinship/data/kinship/kinship
+2021-11-15 19:50:01,340 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `train`. We are not recreating them!
+2021-11-15 19:50:01,341 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `dev`. We are not recreating them!
+2021-11-15 19:50:01,341 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `test`. We are not recreating them!
+2021-11-15 19:50:01,416 - PID: 2561780 - INFO    - __main__             - Creating dev dataset...
+2021-11-15 19:50:01,416 - PID: 2561780 - INFO    - qa_cpg.data          - Creating TF record files for the 'kinship' dataset.
+2021-11-15 19:50:01,417 - PID: 2561780 - INFO    - qa_cpg.data          - Loading and preprocessing the 'kinship' dataset.
+2021-11-15 19:50:01,645 - PID: 2561780 - INFO    - qa_cpg.data          - The directory is /home/masumoto/coper/CoPER_ConvE/temp/kinship/data/kinship/kinship
+2021-11-15 19:50:01,646 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `train`. We are not recreating them!
+2021-11-15 19:50:01,646 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `dev`. We are not recreating them!
+2021-11-15 19:50:01,646 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `test`. We are not recreating them!
+2021-11-15 19:50:01,713 - PID: 2561780 - INFO    - __main__             - Creating test dataset...
+2021-11-15 19:50:01,713 - PID: 2561780 - INFO    - qa_cpg.data          - Creating TF record files for the 'kinship' dataset.
+2021-11-15 19:50:01,713 - PID: 2561780 - INFO    - qa_cpg.data          - Loading and preprocessing the 'kinship' dataset.
+2021-11-15 19:50:01,887 - PID: 2561780 - INFO    - qa_cpg.data          - The directory is /home/masumoto/coper/CoPER_ConvE/temp/kinship/data/kinship/kinship
+2021-11-15 19:50:01,887 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `train`. We are not recreating them!
+2021-11-15 19:50:01,888 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `dev`. We are not recreating them!
+2021-11-15 19:50:01,888 - PID: 2561780 - INFO    - qa_cpg.data          - Tfrecords files exist for `test`. We are not recreating them!
+2021-11-15 19:50:01,951 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:187: DatasetV1.make_one_shot_iterator (from tensorflow.python.data.ops.dataset_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `for ... in dataset:` to iterate over a dataset. If using `tf.estimator`, return the `Dataset` object directly from your input function. As a last resort, you can use `tf.compat.v1.data.make_one_shot_iterator(dataset)`.
+2021-11-15 19:50:01,969 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:188: DatasetV1.make_initializable_iterator (from tensorflow.python.data.ops.dataset_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `for ... in dataset:` to iterate over a dataset. If using `tf.estimator`, return the `Dataset` object directly from your input function. As a last resort, you can use `tf.compat.v1.data.make_initializable_iterator(dataset)`.
+2021-11-15 19:50:01,983 - PID: 2561780 - INFO    - __main__             - Number of entities: 104
+2021-11-15 19:50:01.984029: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2021-11-15 19:50:01,983 - PID: 2561780 - INFO    - __main__             - Number of relations: 50
+2021-11-15 19:50:02.015718: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2400050000 Hz
+2021-11-15 19:50:02.016858: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x557e2d7b89e0 executing computations on platform Host. Devices:
+2021-11-15 19:50:02.016895: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2021-11-15 19:50:02,018 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:200: The name tf.train.Saver is deprecated. Please use tf.compat.v1.train.Saver instead.
+
+2021-11-15 19:50:02,158 - PID: 2561780 - WARNING - tensorflow           - From /home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:201: The name tf.summary.FileWriter is deprecated. Please use tf.compat.v1.summary.FileWriter instead.
+
+2021-11-15 19:50:02.346680: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+AssignSubVariableOp: CPU XLA_CPU 
+ResourceScatterAdd: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+RandomUniform: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Fill: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+NoOp: CPU XLA_CPU 
+ResourceGather: CPU XLA_CPU 
+Identity: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/ent_emb/Initializer/random_uniform/shape (Const) 
+  variables/variables/ent_emb/Initializer/random_uniform/min (Const) 
+  variables/variables/ent_emb/Initializer/random_uniform/max (Const) 
+  variables/variables/ent_emb/Initializer/random_uniform/RandomUniform (RandomUniform) 
+  variables/variables/ent_emb/Initializer/random_uniform/sub (Sub) 
+  variables/variables/ent_emb/Initializer/random_uniform/mul (Mul) 
+  variables/variables/ent_emb/Initializer/random_uniform (Add) 
+  variables/variables/ent_emb (VarHandleOp) /device:GPU:0
+  variables/variables/ent_emb/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/ent_emb/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/ent_emb/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/e1_emb (ResourceGather) /device:GPU:0
+  variables/e1_emb/Identity (Identity) /device:GPU:0
+  variables/output_layer/Gather (ResourceGather) /device:GPU:0
+  variables/output_layer_1/transpose/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/ent_emb/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ResourceScatterAdd (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ResourceScatterAdd_1 (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_24 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_35 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_36 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_37 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.346929: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+AssignSubVariableOp: CPU XLA_CPU 
+ResourceScatterAdd: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+RandomUniform: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Fill: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+NoOp: CPU XLA_CPU 
+ResourceGather: CPU XLA_CPU 
+Identity: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/rel_emb/Initializer/random_uniform/shape (Const) 
+  variables/variables/rel_emb/Initializer/random_uniform/min (Const) 
+  variables/variables/rel_emb/Initializer/random_uniform/max (Const) 
+  variables/variables/rel_emb/Initializer/random_uniform/RandomUniform (RandomUniform) 
+  variables/variables/rel_emb/Initializer/random_uniform/sub (Sub) 
+  variables/variables/rel_emb/Initializer/random_uniform/mul (Mul) 
+  variables/variables/rel_emb/Initializer/random_uniform (Add) 
+  variables/variables/rel_emb (VarHandleOp) /device:GPU:0
+  variables/variables/rel_emb/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/rel_emb/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/rel_emb/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/rel_emb (ResourceGather) /device:GPU:0
+  variables/rel_emb/Identity (Identity) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/rel_emb/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ResourceScatterAdd (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ResourceScatterAdd_1 (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_28 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_47 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_48 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_49 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.347114: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+RandomUniform: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/conv1_weights/Initializer/random_uniform/shape (Const) 
+  variables/variables/conv1_weights/Initializer/random_uniform/min (Const) 
+  variables/variables/conv1_weights/Initializer/random_uniform/max (Const) 
+  variables/variables/conv1_weights/Initializer/random_uniform/RandomUniform (RandomUniform) 
+  variables/variables/conv1_weights/Initializer/random_uniform/sub (Sub) 
+  variables/variables/conv1_weights/Initializer/random_uniform/mul (Mul) 
+  variables/variables/conv1_weights/Initializer/random_uniform (Add) 
+  variables/variables/conv1_weights (VarHandleOp) /device:GPU:0
+  variables/variables/conv1_weights/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/conv1_weights/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/conv1_weights/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/Conv2D/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_weights/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_23 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_32 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_33 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_34 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.347286: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/conv1_bias/Initializer/zeros (Const) 
+  variables/variables/conv1_bias (VarHandleOp) /device:GPU:0
+  variables/variables/conv1_bias/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/conv1_bias/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/conv1_bias/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/add/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/conv1_bias/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_22 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_29 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_30 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_31 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.347485: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+RandomUniform: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+Fill: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/fc_weights/Initializer/random_uniform/shape (Const) 
+  variables/variables/fc_weights/Initializer/random_uniform/min (Const) 
+  variables/variables/fc_weights/Initializer/random_uniform/max (Const) 
+  variables/variables/fc_weights/Initializer/random_uniform/RandomUniform (RandomUniform) 
+  variables/variables/fc_weights/Initializer/random_uniform/sub (Sub) 
+  variables/variables/fc_weights/Initializer/random_uniform/mul (Mul) 
+  variables/variables/fc_weights/Initializer/random_uniform (Add) 
+  variables/variables/fc_weights (VarHandleOp) /device:GPU:0
+  variables/variables/fc_weights/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/fc_weights/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/fc_weights/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/MatMul/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/Initializer/zeros/shape_as_tensor (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/Initializer/zeros/Const (Const) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/Initializer/zeros (Fill) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_weights/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_26 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_41 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_42 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_43 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.347655: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/fc_bias/Initializer/zeros (Const) 
+  variables/variables/fc_bias (VarHandleOp) /device:GPU:0
+  variables/variables/fc_bias/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/fc_bias/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/fc_bias/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/add/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/fc_bias/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_25 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_38 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_39 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_40 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.347831: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+AssignSubVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+NoOp: CPU XLA_CPU 
+ResourceGather: CPU XLA_CPU 
+ResourceScatterAdd: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/variables/pred_bias/Initializer/zeros (Const) 
+  variables/variables/pred_bias (VarHandleOp) /device:GPU:0
+  variables/variables/pred_bias/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/pred_bias/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/pred_bias/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/output_layer/Gather_1 (ResourceGather) /device:GPU:0
+  variables/output_layer_1/add/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/variables/pred_bias/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ResourceScatterAdd (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ResourceScatterAdd_1 (ResourceScatterAdd) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_27 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_44 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_45 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_46 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348011: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/Conv1BN/gamma/Initializer/ones (Const) 
+  variables/Conv1BN/gamma (VarHandleOp) /device:GPU:0
+  variables/Conv1BN/gamma/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/Conv1BN/gamma/Assign (AssignVariableOp) /device:GPU:0
+  variables/Conv1BN/gamma/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/Conv1BN/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/gamma/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_13 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_14 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_15 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348242: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/Conv1BN/beta/Initializer/zeros (Const) 
+  variables/Conv1BN/beta (VarHandleOp) /device:GPU:0
+  variables/Conv1BN/beta/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/Conv1BN/beta/Assign (AssignVariableOp) /device:GPU:0
+  variables/Conv1BN/beta/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/Conv1BN/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/beta1_power/Initializer/initial_value (Const) /device:GPU:0
+  variables/beta1_power (VarHandleOp) /device:GPU:0
+  variables/beta1_power/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/beta1_power/Assign (AssignVariableOp) /device:GPU:0
+  variables/beta1_power/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/beta2_power/Initializer/initial_value (Const) /device:GPU:0
+  variables/beta2_power (VarHandleOp) /device:GPU:0
+  variables/beta2_power/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/beta2_power/Assign (AssignVariableOp) /device:GPU:0
+  variables/beta2_power/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/Conv1BN/beta/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/ent_emb/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/rel_emb/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_weights/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/conv1_bias/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_weights/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/fc_bias/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/variables/pred_bias/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/gamma/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/Conv1BN/beta/group_deps (NoOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/mul (Mul) /device:GPU:0
+  variables/AMSGrad/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  save/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_8 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_9 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_10 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_11 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_12 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348301: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+ReadVariableOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/Conv1BN/moving_mean/Initializer/zeros (Const) 
+  variables/Conv1BN/moving_mean (VarHandleOp) /device:GPU:0
+  variables/Conv1BN/moving_mean/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/Conv1BN/moving_mean/Assign (AssignVariableOp) /device:GPU:0
+  variables/Conv1BN/moving_mean/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/Conv1BN/FusedBatchNorm/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  save/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348351: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+ReadVariableOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/Conv1BN/moving_variance/Initializer/ones (Const) 
+  variables/Conv1BN/moving_variance (VarHandleOp) /device:GPU:0
+  variables/Conv1BN/moving_variance/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/Conv1BN/moving_variance/Assign (AssignVariableOp) /device:GPU:0
+  variables/Conv1BN/moving_variance/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/conv1/Conv1BN/FusedBatchNorm/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  save/AssignVariableOp_3 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348575: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/FCBN/gamma/Initializer/ones (Const) 
+  variables/FCBN/gamma (VarHandleOp) /device:GPU:0
+  variables/FCBN/gamma/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/FCBN/gamma/Assign (AssignVariableOp) /device:GPU:0
+  variables/FCBN/gamma/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/FCBN/batchnorm/mul/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/gamma/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/gamma/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_5 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_19 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_20 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_21 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348737: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+NoOp: CPU XLA_CPU 
+AssignSubVariableOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+ReadVariableOp: CPU XLA_CPU 
+Add: CPU XLA_CPU 
+Sqrt: CPU XLA_CPU 
+Mul: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+RealDiv: CPU XLA_CPU 
+Sub: CPU XLA_CPU 
+Maximum: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/FCBN/beta/Initializer/zeros (Const) 
+  variables/FCBN/beta (VarHandleOp) /device:GPU:0
+  variables/FCBN/beta/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/FCBN/beta/Assign (AssignVariableOp) /device:GPU:0
+  variables/FCBN/beta/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/FCBN/batchnorm/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_1/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_1 (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_1/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_1/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_1/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_2/Initializer/zeros (Const) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_2 (VarHandleOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_2/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_2/Assign (AssignVariableOp) /device:GPU:0
+  variables/variables/FCBN/beta/AMSGrad_2/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/Sqrt (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_1/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_1 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/truediv (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_2/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_2 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_1 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_2 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_2 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/AssignVariableOp (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_3 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_4 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/add (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_3 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_3/x (Const) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/sub_3 (Sub) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_4 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_5 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_5 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/AssignVariableOp_1 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_6 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_7 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/add_1 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/Maximum/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/Maximum (Maximum) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/AssignVariableOp_2 (AssignVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_8 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/Sqrt_1/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/Sqrt_1 (Sqrt) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/mul_6 (Mul) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/add_2 (Add) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/truediv_1 (RealDiv) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/AssignSubVariableOp (AssignSubVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/ReadVariableOp_9 (ReadVariableOp) /device:GPU:0
+  variables/AMSGrad/update_variables/FCBN/beta/group_deps (NoOp) /device:GPU:0
+  save/AssignVariableOp_4 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_16 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_17 (AssignVariableOp) /device:GPU:0
+  save/AssignVariableOp_18 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348903: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+ReadVariableOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/FCBN/moving_mean/Initializer/zeros (Const) 
+  variables/FCBN/moving_mean (VarHandleOp) /device:GPU:0
+  variables/FCBN/moving_mean/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/FCBN/moving_mean/Assign (AssignVariableOp) /device:GPU:0
+  variables/FCBN/moving_mean/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/FCBN/batchnorm/ReadVariableOp_1 (ReadVariableOp) /device:GPU:0
+  save/AssignVariableOp_6 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.348955: W tensorflow/core/common_runtime/colocation_graph.cc:1016] Failed to place the graph without changing the devices of some resources. Some of the operations (that had to be colocated with resource generating operations) are not supported on the resources' devices. Current candidate devices are [
+  /job:localhost/replica:0/task:0/device:CPU:0
+  /job:localhost/replica:0/task:0/device:XLA_CPU:0].
+See below for details of this colocation group:
+Colocation Debug Info:
+Colocation group had the following types and supported devices: 
+Root Member(assigned_device_name_index_=-1 requested_device_name_='/device:GPU:0' assigned_device_name_='' resource_device_name_='/device:GPU:0' supported_device_types_=[CPU, XLA_CPU] possible_devices_=[]
+ReadVariableOp: CPU XLA_CPU 
+AssignVariableOp: CPU XLA_CPU 
+VarIsInitializedOp: CPU XLA_CPU 
+VarHandleOp: CPU XLA_CPU 
+Const: CPU XLA_CPU 
+
+Colocation members, user-requested devices, and framework assigned devices, if any:
+  variables/FCBN/moving_variance/Initializer/ones (Const) 
+  variables/FCBN/moving_variance (VarHandleOp) /device:GPU:0
+  variables/FCBN/moving_variance/IsInitialized/VarIsInitializedOp (VarIsInitializedOp) /device:GPU:0
+  variables/FCBN/moving_variance/Assign (AssignVariableOp) /device:GPU:0
+  variables/FCBN/moving_variance/Read/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  variables/fc_layer/FCBN/batchnorm/ReadVariableOp (ReadVariableOp) /device:GPU:0
+  save/AssignVariableOp_7 (AssignVariableOp) /device:GPU:0
+
+2021-11-15 19:50:02.512736: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2021-11-15 19:50:03,501 - PID: 2561780 - INFO    - __main__             - Step      0 | Loss:     0.6940
+2021-11-15 19:50:03,501 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:50:03,502 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 0...
+2021-11-15 19:50:03,631 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:03,631 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:03,631 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:50:03,632 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:03,632 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:04,030 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:50:04,031 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.006554
+2021-11-15 19:50:04,031 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.029963
+2021-11-15 19:50:04,031 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.052434
+2021-11-15 19:50:04,032 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.099251
+2021-11-15 19:50:04,032 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.198502
+2021-11-15 19:50:04,032 - PID: 2561780 - INFO    - root                 - Mean rank:  48.737828
+2021-11-15 19:50:04,033 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.050389
+2021-11-15 19:50:04,033 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:04,036 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 0...
+2021-11-15 19:50:04,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:04,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:04,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:50:04,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:04,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:04,435 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:50:04,435 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.015829
+2021-11-15 19:50:04,435 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.037244
+2021-11-15 19:50:04,435 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.054935
+2021-11-15 19:50:04,435 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.106145
+2021-11-15 19:50:04,436 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.216946
+2021-11-15 19:50:04,436 - PID: 2561780 - INFO    - root                 - Mean rank:  48.720670
+2021-11-15 19:50:04,436 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.059165
+2021-11-15 19:50:04,436 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:04,471 - PID: 2561780 - INFO    - __main__             - Step 0. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+2021-11-15 19:50:05,223 - PID: 2561780 - INFO    - __main__             - Best dev hits@1 so far is at step 0. Best dev metrics: {'mr': 48.737827715355806, 'mrr': 0.05038884427360127, 'hits@1': 0.006554307116104869, 'hits@3': 0.0299625468164794, 'hits@5': 0.052434456928838954, 'hits@10': 0.09925093632958802, 'hits@20': 0.19850187265917604}
+2021-11-15 19:50:05,230 - PID: 2561780 - INFO    - __main__             - Test metrics at best dev: {'mr': 48.720670391061454, 'mrr': 0.059164962469847385, 'hits@1': 0.015828677839851025, 'hits@3': 0.037243947858473, 'hits@5': 0.05493482309124767, 'hits@10': 0.10614525139664804, 'hits@20': 0.2169459962756052}
+2021-11-15 19:50:12,042 - PID: 2561780 - INFO    - __main__             - Step     50 | Loss:     0.3385
+2021-11-15 19:50:18,469 - PID: 2561780 - INFO    - __main__             - Step    100 | Loss:     0.3057
+2021-11-15 19:50:18,470 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:50:18,470 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 100...
+2021-11-15 19:50:18,494 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:18,494 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:18,494 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:50:18,494 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:18,494 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.026217
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.074906
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.119850
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.231273
+2021-11-15 19:50:18,671 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.435393
+2021-11-15 19:50:18,672 - PID: 2561780 - INFO    - root                 - Mean rank:  29.015918
+2021-11-15 19:50:18,672 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.101537
+2021-11-15 19:50:18,672 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:18,674 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 100...
+2021-11-15 19:50:18,698 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:18,698 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:18,698 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:50:18,698 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:18,698 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:18,895 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:50:18,895 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.027002
+2021-11-15 19:50:18,895 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.077281
+2021-11-15 19:50:18,895 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.121043
+2021-11-15 19:50:18,896 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.217877
+2021-11-15 19:50:18,896 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.436685
+2021-11-15 19:50:18,896 - PID: 2561780 - INFO    - root                 - Mean rank:  29.662011
+2021-11-15 19:50:18,896 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.101079
+2021-11-15 19:50:18,896 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:18,899 - PID: 2561780 - INFO    - __main__             - Step 100. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+2021-11-15 19:50:19,479 - PID: 2561780 - INFO    - __main__             - Best dev hits@1 so far is at step 100. Best dev metrics: {'mr': 29.015917602996254, 'mrr': 0.10153663817499467, 'hits@1': 0.026217228464419477, 'hits@3': 0.0749063670411985, 'hits@5': 0.1198501872659176, 'hits@10': 0.23127340823970038, 'hits@20': 0.4353932584269663}
+2021-11-15 19:50:19,482 - PID: 2561780 - INFO    - __main__             - Test metrics at best dev: {'mr': 29.662011173184357, 'mrr': 0.10107880249911562, 'hits@1': 0.027001862197392923, 'hits@3': 0.07728119180633147, 'hits@5': 0.12104283054003724, 'hits@10': 0.21787709497206703, 'hits@20': 0.4366852886405959}
+2021-11-15 19:50:25,707 - PID: 2561780 - INFO    - __main__             - Step    150 | Loss:     0.2572
+2021-11-15 19:50:31,877 - PID: 2561780 - INFO    - __main__             - Step    200 | Loss:     0.2699
+2021-11-15 19:50:31,878 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:50:31,878 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 200...
+2021-11-15 19:50:31,898 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:31,898 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:31,898 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:50:31,898 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:31,898 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:32,078 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.046816
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.133895
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.177903
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.320225
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.534644
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - root                 - Mean rank:  24.150749
+2021-11-15 19:50:32,079 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.139419
+2021-11-15 19:50:32,080 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:32,082 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 200...
+2021-11-15 19:50:32,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:32,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:32,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:50:32,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:32,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:32,282 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:50:32,283 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.038175
+2021-11-15 19:50:32,283 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.110801
+2021-11-15 19:50:32,283 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.153631
+2021-11-15 19:50:32,283 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.287709
+2021-11-15 19:50:32,283 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.503724
+2021-11-15 19:50:32,284 - PID: 2561780 - INFO    - root                 - Mean rank:  25.355680
+2021-11-15 19:50:32,284 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.125506
+2021-11-15 19:50:32,284 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:32,287 - PID: 2561780 - INFO    - __main__             - Step 200. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+2021-11-15 19:50:32,959 - PID: 2561780 - INFO    - __main__             - Best dev hits@1 so far is at step 200. Best dev metrics: {'mr': 24.15074906367041, 'mrr': 0.13941901111034535, 'hits@1': 0.04681647940074907, 'hits@3': 0.13389513108614232, 'hits@5': 0.17790262172284643, 'hits@10': 0.3202247191011236, 'hits@20': 0.5346441947565543}
+2021-11-15 19:50:32,964 - PID: 2561780 - INFO    - __main__             - Test metrics at best dev: {'mr': 25.355679702048416, 'mrr': 0.1255060571764429, 'hits@1': 0.038175046554934824, 'hits@3': 0.11080074487895716, 'hits@5': 0.15363128491620112, 'hits@10': 0.2877094972067039, 'hits@20': 0.5037243947858473}
+2021-11-15 19:50:39,048 - PID: 2561780 - INFO    - __main__             - Step    250 | Loss:     0.3013
+2021-11-15 19:50:44,798 - PID: 2561780 - INFO    - __main__             - Step    300 | Loss:     0.3047
+2021-11-15 19:50:44,799 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:50:44,799 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 300...
+2021-11-15 19:50:44,840 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:44,840 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:44,840 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:50:44,840 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:44,840 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:45,108 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:50:45,109 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.075843
+2021-11-15 19:50:45,109 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.157303
+2021-11-15 19:50:45,109 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.245318
+2021-11-15 19:50:45,110 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.394195
+2021-11-15 19:50:45,110 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.618914
+2021-11-15 19:50:45,110 - PID: 2561780 - INFO    - root                 - Mean rank:  20.322097
+2021-11-15 19:50:45,111 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.176995
+2021-11-15 19:50:45,111 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:45,115 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 300...
+2021-11-15 19:50:45,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:45,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:45,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:50:45,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:45,145 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.056797
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.151769
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.219739
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.376164
+2021-11-15 19:50:45,344 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.581937
+2021-11-15 19:50:45,345 - PID: 2561780 - INFO    - root                 - Mean rank:  21.643389
+2021-11-15 19:50:45,345 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.158399
+2021-11-15 19:50:45,345 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:45,348 - PID: 2561780 - INFO    - __main__             - Step 300. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+2021-11-15 19:50:45,930 - PID: 2561780 - INFO    - __main__             - Best dev hits@1 so far is at step 300. Best dev metrics: {'mr': 20.322097378277153, 'mrr': 0.17699461704759267, 'hits@1': 0.07584269662921349, 'hits@3': 0.15730337078651685, 'hits@5': 0.24531835205992508, 'hits@10': 0.39419475655430714, 'hits@20': 0.6189138576779026}
+2021-11-15 19:50:45,936 - PID: 2561780 - INFO    - __main__             - Test metrics at best dev: {'mr': 21.64338919925512, 'mrr': 0.1583991802871914, 'hits@1': 0.056797020484171325, 'hits@3': 0.15176908752327747, 'hits@5': 0.21973929236499068, 'hits@10': 0.3761638733705773, 'hits@20': 0.5819366852886406}
+2021-11-15 19:50:52,050 - PID: 2561780 - INFO    - __main__             - Step    350 | Loss:     0.2649
+2021-11-15 19:50:57,556 - PID: 2561780 - INFO    - __main__             - Step    400 | Loss:     0.2092
+2021-11-15 19:50:57,557 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:50:57,558 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 400...
+2021-11-15 19:50:57,579 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:57,579 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:57,579 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:50:57,579 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:57,579 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:57,753 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:50:57,754 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.360487
+2021-11-15 19:50:57,754 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.577715
+2021-11-15 19:50:57,754 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.690075
+2021-11-15 19:50:57,755 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.815543
+2021-11-15 19:50:57,755 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.923221
+2021-11-15 19:50:57,755 - PID: 2561780 - INFO    - root                 - Mean rank:   6.388577
+2021-11-15 19:50:57,755 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.509873
+2021-11-15 19:50:57,755 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:57,758 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 400...
+2021-11-15 19:50:57,781 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:57,781 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:57,781 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:50:57,781 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:50:57,782 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:50:58,033 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:50:58,033 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.336127
+2021-11-15 19:50:58,034 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.558659
+2021-11-15 19:50:58,034 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.663873
+2021-11-15 19:50:58,034 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.800745
+2021-11-15 19:50:58,035 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.914339
+2021-11-15 19:50:58,035 - PID: 2561780 - INFO    - root                 - Mean rank:   6.972998
+2021-11-15 19:50:58,035 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.487797
+2021-11-15 19:50:58,036 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:50:58,039 - PID: 2561780 - INFO    - __main__             - Step 400. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+2021-11-15 19:50:58,775 - PID: 2561780 - INFO    - __main__             - Best dev hits@1 so far is at step 400. Best dev metrics: {'mr': 6.388576779026217, 'mrr': 0.5098729692805426, 'hits@1': 0.3604868913857678, 'hits@3': 0.5777153558052435, 'hits@5': 0.6900749063670412, 'hits@10': 0.8155430711610487, 'hits@20': 0.9232209737827716}
+2021-11-15 19:50:58,780 - PID: 2561780 - INFO    - __main__             - Test metrics at best dev: {'mr': 6.972998137802607, 'mrr': 0.4877968101049635, 'hits@1': 0.3361266294227188, 'hits@3': 0.5586592178770949, 'hits@5': 0.6638733705772812, 'hits@10': 0.8007448789571695, 'hits@20': 0.9143389199255121}
+2021-11-15 19:51:04,423 - PID: 2561780 - INFO    - __main__             - Step    450 | Loss:     0.1728
+2021-11-15 19:51:10,468 - PID: 2561780 - INFO    - __main__             - Step    500 | Loss:     0.1828
+2021-11-15 19:51:10,469 - PID: 2561780 - INFO    - __main__             - Evaluating model with name plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2 ...
+2021-11-15 19:51:10,469 - PID: 2561780 - INFO    - __main__             - Running dev_evaluation at step 500...
+2021-11-15 19:51:10,492 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:51:10,492 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:51:10,492 - PID: 2561780 - INFO    - qa_cpg.metrics       - dev_evaluation
+2021-11-15 19:51:10,492 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:51:10,492 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:51:10,665 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1068 samples.
+2021-11-15 19:51:10,665 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.576779
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.787453
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.864232
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.938202
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.984082
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - root                 - Mean rank:   3.250936
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.700183
+2021-11-15 19:51:10,666 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:51:10,668 - PID: 2561780 - INFO    - __main__             - Running test_evaluation at step 500...
+2021-11-15 19:51:10,691 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:51:10,691 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:51:10,691 - PID: 2561780 - INFO    - qa_cpg.metrics       - test_evaluation
+2021-11-15 19:51:10,692 - PID: 2561780 - INFO    - qa_cpg.metrics       - --------------------------------------------------
+2021-11-15 19:51:10,692 - PID: 2561780 - INFO    - qa_cpg.metrics       - 
+2021-11-15 19:51:10,864 - PID: 2561780 - INFO    - qa_cpg.metrics       - Evaluated 1074 samples.
+2021-11-15 19:51:10,864 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @1:   0.558659
+2021-11-15 19:51:10,864 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @3:   0.771881
+2021-11-15 19:51:10,864 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @5:   0.855680
+2021-11-15 19:51:10,864 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @10:   0.934823
+2021-11-15 19:51:10,865 - PID: 2561780 - INFO    - qa_cpg.metrics       - Hits @20:   0.980447
+2021-11-15 19:51:10,865 - PID: 2561780 - INFO    - root                 - Mean rank:   3.335196
+2021-11-15 19:51:10,865 - PID: 2561780 - INFO    - root                 - Mean reciprocal rank:   0.687705
+2021-11-15 19:51:10,865 - PID: 2561780 - INFO    - root                 - --------------------------------------------------
+2021-11-15 19:51:10,868 - PID: 2561780 - INFO    - __main__             - Step 500. Saving checkpoint at /home/masumoto/coper/CoPER_ConvE/temp/kinship/checkpoints/plain-kinship-ent_emb_200-rel_emb_200-batch_512-prop_neg_10.0-num_labels_100-OnePosPerSampl_False-bn_momentum_0.1-eval_hits@1-dropouts_0.2_0.3_0.2_0.2/model_weights.ckpt/model_weights.ckpt...
+Traceback (most recent call last):
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py", line 262, in <module>
+    saver.save(session, ckpt_path)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 1173, in save
+    {self.saver_def.filename_tensor_name: checkpoint_file})
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 950, in run
+    run_metadata_ptr)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1173, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1350, in _do_run
+    run_metadata)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1356, in _do_call
+    return fn(*args)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1341, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1429, in _call_tf_sessionrun
+    run_metadata)
+KeyboardInterrupt

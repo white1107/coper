@@ -1,0 +1,11 @@
+/home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py:62: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  cfg_dict = yaml.load(file)
+{'model': {'entity_embedding_size': 200, 'relation_embedding_size': 200, 'concat_rel': False, 'input_dropout': 0.2, 'feature_map_dropout': 0.3, 'output_dropout': 0.2, 'label_smoothing_epsilon': 0.1}, 'context': {'context_rel_conv': None, 'context_rel_out': [64], 'context_rel_dropout': 0.2, 'context_rel_use_batch_norm': True}, 'training': {'learning_rate': 0.001, 'batch_size': 512, 'device': '/GPU:0', 'max_steps': 1000, 'prop_negatives': 1.0, 'num_labels': None, 'cache_data': True}, 'eval': {'validation_metric': 'hits@1', 'log_steps': 100, 'ckpt_steps': 1000, 'eval_steps': 10, 'summary_steps': 10, 'eval_on_train': False, 'eval_on_dev': True, 'eval_on_test': True, 'add_loss_summaries': True, 'add_variable_summaries': False, 'add_tensor_summaries': False}}
+Traceback (most recent call last):
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/masumoto/anaconda3/envs/py36_tf114/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/masumoto/coper/CoPER_ConvE/qa_cpg/run_cpg.py", line 75, in <module>
+    cfg.training.one_positive_label_per_sample,
+AttributeError: 'AttributeDict' object has no attribute 'one_positive_label_per_sample'

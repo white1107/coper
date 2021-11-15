@@ -1,0 +1,61 @@
+2021-11-14 19:38:42,855 INFO    MainThread:89606 [wandb_init.py:_log_setup():293] Logging user logs to wandb/run-20211114_193842-115ag4cn/logs/debug.log
+2021-11-14 19:38:42,855 INFO    MainThread:89606 [wandb_init.py:_log_setup():294] Logging internal logs to wandb/run-20211114_193842-115ag4cn/logs/debug-internal.log
+2021-11-14 19:38:42,855 INFO    MainThread:89606 [wandb_setup.py:_flush():69] setting env: {}
+2021-11-14 19:38:42,855 INFO    MainThread:89606 [wandb_setup.py:_flush():69] setting user settings: {'email': 'sakisasaki0205@gmail.com'}
+2021-11-14 19:38:42,855 INFO    MainThread:89606 [wandb_setup.py:_flush():69] multiprocessing start_methods=fork,spawn,forkserver
+2021-11-14 19:38:45,606 INFO    MainThread:89606 [wandb_run.py:_console_start():1290] atexit reg
+2021-11-14 19:38:45,607 INFO    MainThread:89606 [wandb_run.py:_redirect():1160] redirect: SettingsConsole.REDIRECT
+2021-11-14 19:38:45,609 INFO    MainThread:89606 [wandb_run.py:_redirect():1163] Redirecting console.
+2021-11-14 19:38:45,609 INFO    MainThread:89606 [redirect.py:install():196] install start
+2021-11-14 19:38:45,610 INFO    MainThread:89606 [redirect.py:install():211] install stop
+2021-11-14 19:38:45,610 INFO    MainThread:89606 [redirect.py:install():196] install start
+2021-11-14 19:38:45,610 INFO    MainThread:89606 [redirect.py:install():211] install stop
+2021-11-14 19:38:45,610 INFO    MainThread:89606 [wandb_run.py:_redirect():1207] Redirects installed.
+2021-11-14 19:38:45,630 INFO    MainThread:89606 [wandb_run.py:_atexit_cleanup():1263] got exitcode: 1
+2021-11-14 19:38:45,631 INFO    MainThread:89606 [wandb_run.py:_restore():1235] restore
+2021-11-14 19:38:45,631 INFO    MainThread:89606 [redirect.py:uninstall():215] uninstall start
+2021-11-14 19:38:45,632 INFO    MainThread:89606 [redirect.py:_stop():264] _stop: stdout
+2021-11-14 19:38:45,632 INFO    stdout    :89606 [redirect.py:_pipe_relay():119] relay done saw last write: stdout
+2021-11-14 19:38:45,632 INFO    MainThread:89606 [redirect.py:_stop():270] _stop closed: stdout
+2021-11-14 19:38:45,633 INFO    stdout    :89606 [redirect.py:_pipe_relay():135] relay done done: stdout
+2021-11-14 19:38:45,633 INFO    MainThread:89606 [redirect.py:_stop():276] _stop joined: stdout
+2021-11-14 19:38:45,633 INFO    MainThread:89606 [redirect.py:_stop():278] _stop rd closed: stdout
+2021-11-14 19:38:45,633 INFO    MainThread:89606 [redirect.py:uninstall():219] uninstall done
+2021-11-14 19:38:45,633 INFO    MainThread:89606 [redirect.py:uninstall():215] uninstall start
+2021-11-14 19:38:45,634 INFO    MainThread:89606 [redirect.py:_stop():264] _stop: stderr
+2021-11-14 19:38:45,634 INFO    stderr    :89606 [redirect.py:_pipe_relay():119] relay done saw last write: stderr
+2021-11-14 19:38:45,634 INFO    MainThread:89606 [redirect.py:_stop():270] _stop closed: stderr
+2021-11-14 19:38:45,634 INFO    stderr    :89606 [redirect.py:_pipe_relay():135] relay done done: stderr
+2021-11-14 19:38:45,634 INFO    MainThread:89606 [redirect.py:_stop():276] _stop joined: stderr
+2021-11-14 19:38:45,634 INFO    MainThread:89606 [redirect.py:_stop():278] _stop rd closed: stderr
+2021-11-14 19:38:45,634 INFO    MainThread:89606 [redirect.py:uninstall():219] uninstall done
+2021-11-14 19:38:45,786 INFO    MainThread:89606 [wandb_run.py:_wait_for_finish():1377] got exit ret: uuid: "7c339986e3b049d08f0c08970c718adb"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 1
+    }
+    pusher_stats {
+      total_bytes: 800
+    }
+  }
+}
+
+2021-11-14 19:38:47,792 INFO    MainThread:89606 [wandb_run.py:_wait_for_finish():1377] got exit ret: uuid: "f1edce5219d849298bdbcaa77fbcb6dd"
+response {
+  poll_exit_response {
+    done: true
+    exit_result {
+    }
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 3447
+      total_bytes: 3447
+    }
+  }
+}
+
+2021-11-14 19:38:49,018 INFO    MainThread:89606 [wandb_run.py:_show_files():1586] logging synced files
+2021-11-14 19:38:49,020 INFO    MainThread:89606 [internal.py:handle_exit():137] Internal process exited
