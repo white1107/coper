@@ -621,7 +621,7 @@ class NationsLoader(_ConvEDataLoader):
 
 
 class UMLSLoader(_ConvEDataLoader):
-    def __init__(self):
+    def __init__(self):     
         dataset_name = 'umls'
         super(UMLSLoader, self).__init__(dataset_name)
 
