@@ -97,7 +97,7 @@ logger.info('Model name: %s', model_name)
 # Create directories for saving downloaded data, summaries, logs and checkpoints.
 working_dir = os.path.join(os.getcwd(), 'temp', data_loader.dataset_name)
 data_dir = os.path.join(working_dir, 'data')
-data_dir = os.path.join(data_dir, data_loader.dataset_name) if 'nell' not in data_loader.dataset_name else data_di
+data_dir = os.path.join(data_dir, data_loader.dataset_name) if 'nell' not in data_loader.dataset_name else data_dir
 log_dir = os.path.join(working_dir, 'models', model_name, 'logs')
 summaries_dir = os.path.join(working_dir, 'summaries', model_name)
 ckpt_dir = os.path.join(working_dir, 'checkpoints', model_name, 'model_weights.ckpt')
