@@ -4,6 +4,7 @@ import logging
 import os
 import numpy as np
 import tensorflow as tf
+import wandb
 
 
 __all__ = ['ranking_and_hits']
@@ -65,6 +66,7 @@ def ranking_and_hits(model, results_dir, data_iterator_handle, name, session=Non
     for hits_level in hits_to_compute:
         hits_value = np.mean(hits[hits_level])
         logger.info('Hits @%d: %10.6f', hits_level, hits_value)
+        wandb.log({'Hits @{0}'.format(hits_level):np.mean(hits_value)})
         hits[hits_level] = hits_value
         # Write hits to respective files.
         if enable_write_to_file:
